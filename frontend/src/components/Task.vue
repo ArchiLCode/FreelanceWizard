@@ -29,7 +29,6 @@
       />
       <label class="checkbox-label" for="done"></label>
     </div>
-
     <button
       @click.stop="deleteTask()"
       class="delete"
@@ -183,12 +182,13 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-$main-bg-color: #17171a;
-$elem-bg-color: #3e4045;
+$main-bg-color: #1b1b23;
+$elem-bg-color: #212636;
 $accent-color: #882ee6;
+$text-color: #757575;
 
 .task {
-  background-color: $elem-bg-color;
+  background-color: rgba($elem-bg-color, 0.7);
   flex-direction: row;
   border-radius: 10px;
   align-items: center;
@@ -197,6 +197,7 @@ $accent-color: #882ee6;
   padding: 25px;
   margin: 15px 0;
   gap: 20px;
+  backdrop-filter: blur(2px);
 
   &:hover .delete {
     opacity: 1;
@@ -220,6 +221,10 @@ h2 {
 }
 .delete {
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   justify-self: flex-end;
   background-color: transparent;
   border: none;
@@ -228,7 +233,8 @@ h2 {
   cursor: pointer;
   transition: 0.2s;
   border-radius: 5px;
-  padding: 3px;
+  width: 41px;
+  height: 41px;
 
   &:hover {
     background-color: darken($elem-bg-color, 10%);
