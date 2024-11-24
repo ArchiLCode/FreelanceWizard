@@ -12,6 +12,6 @@ public interface TaskResponseDtoMapper {
     TaskResponseDto map(Task task);
 
     default String map(OffsetDateTime time) {
-        return time.toString();
+        return time != null ? time.toString() : null;
     }
 }
