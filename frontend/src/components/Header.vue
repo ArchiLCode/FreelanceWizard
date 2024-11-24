@@ -3,7 +3,7 @@
     <img
       @click="router.push('/')"
       class="name"
-      src="../assets/newlogo.png"
+      src="../assets/freelancewizard.png"
       alt="SpringBoard"
     />
     <div class="buttons">
@@ -32,7 +32,7 @@ const logout = () => {
 <style lang="scss" scoped>
 $main-bg-color: #17171a;
 $elem-bg-color: #3e4045;
-$accent-color: #cb0a0a;
+$accent-color: #882ee6;
 
 .header {
   width: 100%;
@@ -45,7 +45,7 @@ $accent-color: #cb0a0a;
 }
 
 .name {
-  width: 320px;
+  width: 350px;
   cursor: pointer;
   margin-left: 10%;
 }

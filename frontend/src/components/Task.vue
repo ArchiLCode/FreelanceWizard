@@ -185,7 +185,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 $main-bg-color: #17171a;
 $elem-bg-color: #3e4045;
-$accent-color: #cb0a0a;
+$accent-color: #882ee6;
 
 .task {
   background-color: $elem-bg-color;
