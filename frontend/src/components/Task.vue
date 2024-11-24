@@ -1,5 +1,18 @@
 <template>
   <div class="task" @click="changePopupVisibility()">
+    <div class="checkbox" v-if="props.task.title !== null">
+      <input
+        class="checkbox-input"
+        type="checkbox"
+        id="done"
+        :checked="props.task.is_done"
+        v-model="isDone"
+        @click.stop
+        @change="editIsDone(props.task.id, isDone)"
+      />
+      <label class="checkbox-label" for="done"></label>
+    </div>
+
     <h3 v-if="!editing" @click.stop="editing = !editing" class="title">
       {{ props.task.title }}
     </h3>
@@ -17,18 +30,11 @@
       </option>
     </select>
 
-    <div class="checkbox" v-if="props.task.title !== null">
-      <input
-        class="checkbox-input"
-        type="checkbox"
-        id="done"
-        :checked="props.task.is_done"
-        v-model="isDone"
-        @click.stop
-        @change="editIsDone(props.task.id, isDone)"
-      />
-      <label class="checkbox-label" for="done"></label>
+    <div class="in-work" v-if="finishedAt">
+      Completed in: {{ pluralizeHours(complitedIn) }}
     </div>
+    <div class="in-work" v-else>In work: {{ pluralizeHours(inWorkTime) }}</div>
+
     <button
       @click.stop="deleteTask()"
       class="delete"
@@ -109,7 +115,7 @@
 
 <script setup>
 import { useTaskStore } from '@/stores/TaskStore'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import FilledButton from './FilledButton.vue'
 import OutlinedButton from './OutlinedButton.vue'
 import { useGlobalState } from '@/stores/GlobalStore'
@@ -123,8 +129,18 @@ const isDone = ref(props.task.is_done)
 const editing = ref(false)
 const popupShowing = ref(false)
 const titles = ref([])
+const inWorkTime = new Date(
+  new Date() - new Date(props.task.created_at)
+).getHours()
+const finishedAt = ref(props.task.finished_at || null)
 
 const globalState = useGlobalState()
+
+const complitedIn = computed(() => {
+  return new Date(
+    new Date(finishedAt.value) - new Date(props.task.created_at)
+  ).getHours()
+})
 
 const changePopupVisibility = () => {
   if (props.task.title) popupShowing.value = !popupShowing.value
@@ -135,6 +151,7 @@ const deleteTask = (id = props.task.id) => {
 }
 
 const editIsDone = (id = props.task.id, isDone = this.isDone) => {
+  finishedAt.value = isDone ? new Date() : null
   taskStore.editIsDone(id, isDone)
 }
 
@@ -176,6 +193,13 @@ const fetchTitles = async () => {
   }
 }
 
+const pluralizeHours = (hours) => {
+  if (hours === 1) {
+    return `${hours} hour`
+  }
+  return `${hours} hours`
+}
+
 onMounted(() => {
   fetchTitles()
 })
@@ -197,7 +221,7 @@ $text-color: #757575;
   padding: 25px;
   margin: 15px 0;
   gap: 20px;
-  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 
   &:hover .delete {
     opacity: 1;
@@ -342,5 +366,12 @@ h2 {
 }
 option {
   background-color: $elem-bg-color;
+}
+
+.in-work {
+  color: $accent-color;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 30px;
 }
 </style>

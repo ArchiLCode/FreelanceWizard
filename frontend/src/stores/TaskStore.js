@@ -26,6 +26,8 @@ export const useTaskStore = defineStore('TaskStore', {
         this.tasks = response.data.tasks
       } catch (e) {
         globalState.showNotification('You are not authorized! Please log in.')
+        globalState.setToken(null)
+        globalState.setUserId(null)
       }
     },
     async sendData(id, title, payload, isDone) {
