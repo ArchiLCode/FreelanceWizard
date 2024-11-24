@@ -8,11 +8,11 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Task Manager System API",
-                description = "Task Manager", version = "v1.0.0",
+                title = "Freelance Wizard System API",
+                description = "Freelance Wizard", version = "v1.0.0",
                 contact = @Contact(
-                        name = "Solonchev Mark",
-                        email = "solonchev32@gmail.com"
+                        name = "Logvinov Artem",
+                        email = "artemartem330@yandex.ru"
                 )
         )
 )
