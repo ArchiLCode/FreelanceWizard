@@ -47,15 +47,22 @@ watch(
 </script>
 
 <style lang="scss" scoped>
+$main-bg-color: #1b1b23;
+$elem-bg-color: #212636;
+$accent-color: #882ee6;
+$text-color: #757575;
+
 .notification {
   position: fixed;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: darken(#cb0a0a, 10%);
-  color: #17171a;
+  background-color: rgba($elem-bg-color, 0.7);
+  backdrop-filter: blur(2px);
+  color: $accent-color;
   font-weight: 500;
-  padding: 20px;
+  font-size: 16px;
+  padding: 20px 30px;
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
@@ -68,7 +75,7 @@ watch(
 .notification button {
   background: none;
   border: none;
-  color: #17171a;
+  color: $accent-color;
   font-size: 20px;
   cursor: pointer;
 }

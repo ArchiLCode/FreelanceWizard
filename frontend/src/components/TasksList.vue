@@ -55,9 +55,13 @@
       </div>
     </div>
     <div v-else class="unauthorized" @click="router.push('/login')">
-      You are not logged in!<br />The content is available only to authorized
-      users.
-      <img src="../assets/ussr-cat.png" alt="" />
+      <p>
+        "Ah, young seeker! The path to wisdom and success lies within these
+        enchanted realms. But first, unlock the secrets by revealing your true
+        identity. <br />Log in or register to embark on this magical journey!"
+      </p>
+      <div class="message-arrow"></div>
+      <img src="../assets/wizard.png" alt="" />
     </div>
   </div>
 </template>
@@ -119,8 +123,8 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 $main-bg-color: #17171a;
-$elem-bg-color: #3e4045;
-$accent-color: #cb0a0a;
+$elem-bg-color: #212636;
+$accent-color: #882ee6;
 
 .new-task {
   display: flex;
@@ -178,7 +182,7 @@ h2 {
 .unauthorized {
   display: flex;
   flex-direction: column;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 800;
   align-items: center;
   text-align: center;
@@ -187,8 +191,25 @@ h2 {
   margin: 3vh auto;
   cursor: pointer;
 
+  p {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgba($elem-bg-color, 0.7);
+    backdrop-filter: blur(2px);
+  }
+
+  .message-arrow {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #212636;
+    opacity: 0.7;
+    align-self: center;
+  }
+
   img {
-    margin-top: 30px;
+    margin-top: 10px;
     width: 45%;
   }
 }
