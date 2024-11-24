@@ -15,13 +15,24 @@ public class TaskResponseDto {
     @Schema(name = "id", description = "Идентификатор задачи")
     @JsonProperty("id")
     private String id;
+
     @Schema(name = "title", description = "Заголовок задачи")
     @JsonProperty("title")
     private String title;
+
+    @Schema(name = "title", description = "Время открытия задачи")
+    @JsonProperty("created_at")
+    private String createdAt;
+
     @Schema(name = "payload", description = "Тело задачи")
     @JsonProperty("payload")
     private String payload;
+
     @Schema(name = "is_done", description = "Закончена ли задача")
     @JsonProperty("is_done")
     private boolean isDone;
+
+    @Schema(name = "finished_at", description = "Время окончания задачи", nullable = true)
+    @JsonProperty("finished_at")
+    private String finishedAt;
 }

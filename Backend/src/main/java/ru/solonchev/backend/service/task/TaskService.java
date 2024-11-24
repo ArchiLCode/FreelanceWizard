@@ -16,6 +16,7 @@ import ru.solonchev.backend.persistence.repository.TaskRepository;
 import ru.solonchev.backend.persistence.repository.TypeTitleRepository;
 import ru.solonchev.backend.persistence.repository.UserRepository;
 
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Service
@@ -44,9 +45,15 @@ public class TaskService {
     }
 
     private void updateTask(Task task, TaskSaveDto request) {
+        OffsetDateTime now = OffsetDateTime.now();
         task.setTitle(request.title());
         task.setPayload(request.payload());
         task.setIsDone(request.isDone());
+        if (request.isDone()) {
+            task.setFinishedAt(now);
+        } else {
+            task.setFinishedAt(null);
+        }
         taskRepository.save(task);
     }
 
