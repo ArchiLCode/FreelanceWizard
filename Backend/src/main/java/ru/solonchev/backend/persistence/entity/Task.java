@@ -9,6 +9,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -50,27 +51,20 @@ public class Task {
 
     @Setter
     @Column(name = "created_at", nullable = false, updatable = false)
-    private OffsetDateTime createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "finished_at")
     @Setter
-    private OffsetDateTime finishedAt;
+    private LocalDateTime finishedAt;
 
     @PrePersist
     private void prePersist() {
-        var now = OffsetDateTime.now();
+        var now = LocalDateTime.now();
         if (Objects.isNull(this.createdAt)) {
             this.setCreatedAt(now);
         }
         if (Objects.isNull(this.isDone)) {
             this.setIsDone(false);
         }
-    }
-
-    public Task noteFinished() {
-        var now = OffsetDateTime.now();
-        this.isDone = true;
-        this.finishedAt = now;
-        return this;
     }
 }
